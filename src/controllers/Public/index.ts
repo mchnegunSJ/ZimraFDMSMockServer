@@ -171,3 +171,13 @@ export const lookupDeviceID = async (req: Request, res: Response) => {
     // SIMULATION: In real life, ZIMRA checks if this serial is compliant.
     // Here, we generate a valid Device ID for it.
     // Let's make it deterministic based on the serial length or random
+
+    // Simple mock implementation: return a static deviceID
+    const mockDeviceID = '1001';
+
+    return res.status(200).json({
+        operationID: generateOperationID(),
+        deviceID: mockDeviceID,
+        serialNumber,
+    });
+}
