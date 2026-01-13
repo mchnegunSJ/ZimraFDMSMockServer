@@ -17,8 +17,8 @@ This is a mock server designed to simulate requests and responses as specified i
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/takumade/zimra-fdms-mock-server.git
-   cd zimra-fdms-mock-server
+   git clone https://github.com/your-github-username/your-repo-name.git
+   cd your-repo-name
    ```
 
 2. Install dependencies:

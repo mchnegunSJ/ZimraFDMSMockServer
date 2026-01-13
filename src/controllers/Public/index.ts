@@ -156,3 +156,18 @@ export const verifyTaxpayerInformation  = async (req: Request, res: Response) =>
     });
 }
 
+// --- NEW FUNCTION: LOOKUP DEVICE ID ---
+export const lookupDeviceID = async (req: Request, res: Response) => {
+    const { serialNumber } = req.body;
+
+    if (!serialNumber) {
+        return res.status(400).json({
+            type: "https://httpstatuses.io/400",
+            title: "Bad Request",
+            detail: "Serial Number is required"
+        });
+    }
+
+    // SIMULATION: In real life, ZIMRA checks if this serial is compliant.
+    // Here, we generate a valid Device ID for it.
+    // Let's make it deterministic based on the serial length or random

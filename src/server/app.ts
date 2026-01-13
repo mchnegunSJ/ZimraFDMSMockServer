@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import cors from 'cors'; // Import CORS for connection safety
 import deviceRoutes from '../routes/Device';
 import publicRoutes from '../routes/Public';
 import userRoutes from '../routes/User';
@@ -15,6 +16,9 @@ class App {
     }
 
     private config(): void {
+        // 1. Add CORS Middleware
+        this.app.use(cors());
+
         // Log all requests
         this.app.use((req, res, next) => {
             logger.info({
@@ -31,10 +35,19 @@ class App {
     }
 
     private routes(): void {
-        this.app.use('/Device', deviceRoutes);
-        this.app.use('/Public', publicRoutes);
-        this.app.use('/User', userRoutes);
-        this.app.use('/ProductsStock', productsStockRoutes);
+        // 2. CRITICAL CHANGE: Add '/v1' to match ZIMRA's real API structure
+        // The Python backend sends requests to .../Device/v1/...
+        this.app.use('/Device/v1', deviceRoutes);
+        
+        // Keep these as they are or comment out if not used yet
+        this.app.use('/Public/v1', publicRoutes);
+        this.app.use('/User/v1', userRoutes);
+        this.app.use('/ProductsStock/v1', productsStockRoutes);
+
+        // 3. Health Check Route (Good for testing)
+        this.app.get('/', (req, res) => {
+            res.json({ status: 'Online', service: 'ZIMRA FDMS Mock Server' });
+        });
     }
 }
 

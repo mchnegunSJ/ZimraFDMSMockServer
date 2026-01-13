@@ -346,7 +346,7 @@ PFtwMHe7BUfiwTzGYqav21h1w/amPkxNVQ7Li4M=
 }
 
 
-export const submitReciept  = async (req: Request, res: Response) => {
+export const submitReceipt  = async (req: Request, res: Response) => {
 
     const { deviceID } = req.params; // deviceID from path
     const deviceModelName = req.header('DeviceModelName');
